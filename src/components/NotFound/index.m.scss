@@ -1,0 +1,11 @@
+.not-found{
+  font-size: 36px;
+  text-align: center;
+
+  :global{
+    .link {
+      cursor: pointer;
+      font-size: 16px;
+    }
+  }
+}
