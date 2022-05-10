@@ -6,7 +6,7 @@ import {metaMask, walletConnect} from "./wallets";
 
 export default function useConnectWallet() {
   const {provider, signer, chainId} = useSelector((state: RootState) => state.ethers);
-  const web3ModalInstance = useRef<any>();
+
   const account = useSelector((state: RootState) => state.userInfo?.account);
   const dispatch = useDispatch<Dispatch>();
 
@@ -44,15 +44,16 @@ export default function useConnectWallet() {
     }
   }, [])
 
+  // or you can just connect web3modal
+
   const disconnect = useCallback(() => {
-    web3ModalInstance.current?.clearCachedProvider();
     localStorage.removeItem('isConnected');
     dispatch.userInfo.setAccount();
     dispatch.ethers.setProvider();
     dispatch.ethers.setSigner();
     dispatch.ethers.setChainId(1);
 
-  }, [provider, web3ModalInstance])
+  }, [provider])
 
   const subscribeProvider = useCallback(() => {
     if (provider) {
